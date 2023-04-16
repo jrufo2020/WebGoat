@@ -105,6 +105,7 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
     }
     try {
       Jwt jwt = Jwts.parser().setSigningKey(JWT_PASSWORD).parseClaimsJws(token.replace("Bearer ", ""));
+      
       Claims claims = (Claims) jwt.getBody();
       String user = (String) claims.get("user");
       if ("Tom".equals(user)) {
