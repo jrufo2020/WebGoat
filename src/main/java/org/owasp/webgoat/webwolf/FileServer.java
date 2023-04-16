@@ -76,7 +76,7 @@ public class FileServer {
     var destinationDir = new File(fileLocation, user.getUsername());
     destinationDir.mkdirs();
     var canonicalDestinationPath = myFile.getCanonicalPath();
-    if (!canonicalDestinationPath.startsWith(destinationDir) {
+    if (!canonicalDestinationPath.startsWith(destinationDir)) {
         throw new IOException("Entry is outside of the target directory");
     }
     myFile.transferTo(new File(destinationDir, myFile.getOriginalFilename()));
