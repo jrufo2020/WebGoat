@@ -75,12 +75,9 @@ public class FileServer {
     var user = (WebGoatUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     var destinationDir = new File(fileLocation, user.getUsername());
     destinationDir.mkdirs();
-    var canonicalDestinationPath =  myFile.getOriginalFilename();
-    if (!canonicalDestinationPath.startsWith(destinationDir)) {
-        throw new IOException("Entry is outside of the target directory");
-    }
-    myFile.transferTo(new File(destinationDir, canonicalDestinationPath));
-    log.debug("File saved to {}", new File(destinationDir, canonicalDestinationPath));
+    
+    myFile.transferTo(new File(destinationDir, myFile.getOriginalFilename()));
+    log.debug("File saved to {}", new File(destinationDir, myFile.getOriginalFilename()));
 
     return new ModelAndView(
         new RedirectView("files", true),
